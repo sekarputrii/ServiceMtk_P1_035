@@ -12,15 +12,19 @@ namespace FirstWCFService_035
     public interface IMatematika
     {
         [OperationContract]
+        [FaultContract(typeof(MathFault))] //membuat kelas yang melambangkan exception
         /*output->*/
         int Tambah(int a, int b); //method
         [OperationContract]
+        [FaultContract(typeof(MathFault))] //membuat kelas yang melambangkan exception
         int Kurang(int a, int b); //input
         [OperationContract]
         int Kali(int a, int b);
         [OperationContract]
+        [FaultContract(typeof(MathFault))] //membuat kelas yang melambangkan exception
         int Bagi(int a, int b);
         [OperationContract]
+        [FaultContract(typeof(MathFault))] //membuat kelas yang melambangkan exception
         Koordinat TKoordinat(Koordinat a, Koordinat b); //object dari class
     }
     [DataContract]
@@ -39,5 +43,13 @@ namespace FirstWCFService_035
             get { return _y; }
             set { _y = value; }
         }
+    }
+    [DataContract]
+    class MathFault
+    {
+        [DataMember]
+        public string Kode { get; set; }
+        [DataMember]
+        public string Pesan { get; set; }
     }
 }
